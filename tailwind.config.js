@@ -24,6 +24,7 @@ module.exports = {
       colors: {
         mainColor: '#112D4E',
         subColor: '#3F72AF',
+        superSubColor: '#DBE2EF',
         blackColor: '#1D1D1D',
       }
     },
