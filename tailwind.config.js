@@ -22,6 +22,7 @@ module.exports = {
       padding: px0_1000,
       margin: px0_1000,
       colors: {
+        mainColor: '#112D4E',
         subColor: '#3F72AF',
         blackColor: '#1D1D1D',
       }
