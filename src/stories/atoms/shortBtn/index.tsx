@@ -7,4 +7,3 @@ const ShortBtn = ({text, activate}: TLongBtn) => {
 }
 
 export default ShortBtn;
-
