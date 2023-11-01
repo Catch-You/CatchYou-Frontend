@@ -1,4 +1,4 @@
-type TLongBtn = {
+export type TLongBtn = {
   text: string;
   activate?: boolean;
 }

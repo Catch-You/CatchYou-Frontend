@@ -1,9 +1,9 @@
-type TLongfield = {
+export type TField = {
   label: string;
   placeholder: string;
 }
 
-const Longfield = ({label, placeholder}: TLongfield) => {
+const Longfield = ({label, placeholder}: TField) => {
   return (
     <div className="flex flex-col gap-2">
       <label>{label}</label>
