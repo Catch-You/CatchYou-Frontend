@@ -8,6 +8,7 @@ const meta: Meta<typeof ShortBtn> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof ShortBtn>;
 
 export const Primary: Story = {
