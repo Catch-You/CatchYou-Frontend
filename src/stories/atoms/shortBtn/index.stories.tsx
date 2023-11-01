@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import  shortBtn  from '.';
+import  ShortBtn  from '.';
 
-const meta: Meta<typeof shortBtn> = {
-  title: 'atoms/shortBtn',
-  component: shortBtn,
+const meta: Meta<typeof ShortBtn> = {
+  title: 'atoms/ShortBtn',
+  component: ShortBtn,
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof shortBtn>;
+type Story = StoryObj<typeof ShortBtn>;
 
 export const Primary: Story = {
   args: {
