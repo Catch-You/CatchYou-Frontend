@@ -25,9 +25,10 @@ module.exports = {
         mainColor: '#112D4E',
         subColor: '#3F72AF',
         superSubColor: '#DBE2EF',
-        blackColor: '#1D1D1D',
         errorColor: '#F4800B',
-        errorSubColor: '#FCF0E5'
+        errorSubColor: '#FCF0E5',
+        blackColor: '#1D1D1D',
+        grayColor: '#717073'
       }
     },
   },
