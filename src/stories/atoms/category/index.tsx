@@ -9,7 +9,7 @@ const Category = () => {
       {localCategory.map((local, index) => (
         <span 
           key={local} 
-          className="px-30 py-9 text-18 font-semibold text-black border-2 border-subColor rounded-30 hover:bg-subColor hover:text-white focus:bg-subColor focus:text-white"
+          className="px-20 py-8 text-15 font-medium text-black border bg-white border-subColor rounded-30 hover:bg-subColor hover:text-white focus:bg-subColor focus:text-white"
           onClick={() => setActiveCategory(index)}
           >
           {local}
