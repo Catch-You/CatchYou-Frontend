@@ -41,7 +41,7 @@ const useValid = (changeValue: TValid) => {
   // 이름 형식 유효성 체크
   // 숫자, 특수문자 x
   const validateName = (name: string) => {
-    const exp = /^[A-Za-z]+$/i;
+    const exp = /^[가-힣a-zA-Z]+$/;
     return exp.test(name);
   };
 
@@ -52,6 +52,7 @@ const useValid = (changeValue: TValid) => {
       password: changeValue.password? (validatePassword(changeValue.password) ? '' : '비밀번호 형식이 올바르지 않습니다.'):'',
       repassword: changeValue.repassword? (changeValue.password === changeValue.repassword ? '' : '비밀번호가 일치하지 않습니다.'): '',
       name: changeValue.name ? (validateName(changeValue.name) ? '' : '특수문자와 숫자를 제외한 실명을 입력해주세요.'): '',
+      code: '코드가 인증되었습니다.'
     });
 
     setIsValid({
