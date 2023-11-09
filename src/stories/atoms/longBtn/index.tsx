@@ -1,7 +1,9 @@
 export type TLongBtn = {
-  text: string;
+  text: React.ReactNode;
   activate: boolean;
-  onClick: () => void;
+  disabled?: boolean;
+  onClick?: () => void;
+  onChange?: () => void;
 }
 
 const LongBtn = ({ text, activate, onClick }: TLongBtn) => {
