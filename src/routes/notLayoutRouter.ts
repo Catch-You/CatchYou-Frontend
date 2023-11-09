@@ -1,3 +1,4 @@
+import EnterCodePage from "../stories/pages/enterCode/EnterCodePage";
 import LoginPage from "../stories/pages/login/LoginPage";
 import SignMemberPage from "../stories/pages/sign/SignMemberPage";
 import SignPage from "../stories/pages/sign/SignPage";
@@ -19,6 +20,11 @@ export const NOT_LAYOUT_ROUTES_URLS = {
     path: () => '/join',
     component: SignPage,
   },
+  enterCodePage: {
+    name: "사건코드 입력 페이지",
+    path: () => '/incidentCode',
+    component: EnterCodePage,
+  }
 } as const;
 
 export const NOT_LAYOUT_ROUTES: TRoute[] = Object.values(NOT_LAYOUT_ROUTES_URLS);

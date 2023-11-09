@@ -1,5 +1,5 @@
 export type TField = {
-  label: string;
+  label?: string;
   placeholder?: string;
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
