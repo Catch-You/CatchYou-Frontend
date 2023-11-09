@@ -32,7 +32,7 @@ const LoginPage = () => {
         <div className="mt-30"><Longfield label="이메일" type="text" placeholder="example@gmail.com" onChange={e => setForm({...form, email:e.target.value})} /></div>
         <div className="mt-10"><Longfield label="비밀번호" type="password" placeholder="대소문자 구분 없이 6자 이상, 특수문자 포함" onChange={e => setForm({...form, password:e.target.value})} /></div>
         <div className="mt-50"><LongBtn text="로그인" onClick={handleClick} activate={form.email && form.password? true: false} /></div>
-        <div className="mt-12 gap-2 text-14 text-center">회원이 아니신가요? <a href="/join" className="text-14 font-semibold">가입하기</a></div>
+        <div className="mt-12 gap-2 text-14 text-center">회원이 아니신가요? <a href="/member" className="text-14 font-semibold">가입하기</a></div>
       </form>
     </div>
   )
