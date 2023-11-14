@@ -8,9 +8,9 @@ const SignMemberPage = () => {
   }
   return(
     <div className="justify-center items-center ">
-      <div className="flex justify-center mt-100 gap-8">
+      <div className="flex justify-center mt-100 gap-12">
       <SignMember title="경찰" subtitle="과학수사관리관, 수사국, 형사국" police={true} onClick={handleJoinClick} />
-      <SignMember title="목격자" subtitle="일반 시민, 참고인 권한" police={false} onClick={handleJoinClick} />
+      <SignMember title="몽타주 전문가" subtitle="몽타주 제작 전문가" police={false} onClick={handleJoinClick} />
       </div>
     </div>
   )
