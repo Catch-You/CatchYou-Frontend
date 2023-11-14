@@ -12,8 +12,8 @@ type Story = StoryObj<typeof SignMember>;
 
 export const Primary: Story = {
   args: {
-    title: '목격자',
-    subtitle: '일반 시민, 참고인 권한',
+    title: '몽타주 전문가',
+    subtitle: '몽타주 제작 전문가',
     police: false
   },
 };     
