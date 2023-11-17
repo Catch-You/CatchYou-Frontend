@@ -1,24 +1,13 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { TCaseForm } from '../../pages/caseRegist/CaseRegistPage';
 
 type TSelector = {
   text: string;
   options: string[];
   type: number;
-  caseForm: {
-    open: boolean,
-    region: string,
-    type: string,
-    impressive: string,
-    overview: string,
-  },
-  setCaseForm: Dispatch<SetStateAction<{
-    open: boolean,
-    region: string,
-    type: string,
-    impressive: string,
-    overview: string,
-  }>>
+  caseForm: TCaseForm,
+  setCaseForm: Dispatch<SetStateAction<TCaseForm>>;
 }
 
 const Selector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
