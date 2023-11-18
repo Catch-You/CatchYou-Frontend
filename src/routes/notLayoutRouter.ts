@@ -1,3 +1,4 @@
+import CaseDetailPage from "../stories/pages/caseDetail/CaseDetailPage";
 import CaseRegistPage from "../stories/pages/caseRegist/CaseRegistPage";
 import EnterCodePage from "../stories/pages/enterCode/EnterCodePage";
 import LoginPage from "../stories/pages/login/LoginPage";
@@ -30,7 +31,12 @@ export const NOT_LAYOUT_ROUTES_URLS = {
     name: "사건 등록 페이지",
     path: () => '/registerCase',
     component: CaseRegistPage,
-  }
+  },
+  caseDetailPage: {
+    name: "사건 상세 페이지",
+    path: (id = ":id") => `/${id}`,
+    component: CaseDetailPage,
+  },
 } as const;
 
 export const NOT_LAYOUT_ROUTES: TRoute[] = Object.values(NOT_LAYOUT_ROUTES_URLS);
