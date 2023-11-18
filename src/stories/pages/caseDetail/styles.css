@@ -1,0 +1,21 @@
+.montage {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-image: url('https://img.danawa.com/prod_img/500000/388/133/img/24133388_1.jpg?_v=20230728095239');
+  background-size: cover;
+  background-position: center; 
+  border: 2px solid #DBE2EF;
+  border-radius: 12px;
+}
+
+.region {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: #112D4E;
+  font-weight: 600;
+  background-color: #DBE2EF;
+  padding: 8px 20px;
+  border-radius: 18px;
+}
