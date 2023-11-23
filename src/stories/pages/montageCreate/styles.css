@@ -1,0 +1,10 @@
+.montageNew {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-image: url('https://img.danawa.com/prod_img/500000/388/133/img/24133388_1.jpg?_v=20230728095239');
+  background-size: cover;
+  background-position: center; 
+  border: 2px solid #DBE2EF;
+  border-radius: 12px;
+}
