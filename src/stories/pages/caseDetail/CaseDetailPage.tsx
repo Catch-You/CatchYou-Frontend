@@ -1,3 +1,4 @@
+import CommonBtn from '../../atoms/commonBtn';
 import './styles.css'
 
 const CaseDetailPage = () => {
@@ -25,7 +26,7 @@ const CaseDetailPage = () => {
             눈물을 감추기엔 네가 가여워서 못 버텨
           </div>
         </div>
-        <div className="flex justify-end"><button className="text-white bg-mainColor px-35 py-10 rounded-16 my-20">수정하기</button></div>
+        <div className="flex justify-end mt-10"><CommonBtn text="수정하기" /></div>
       </div>
     </div>
   )

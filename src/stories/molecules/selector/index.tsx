@@ -5,9 +5,9 @@ import { TCaseForm } from '../../pages/caseRegist/CaseRegistPage';
 type TSelector = {
   text: string;
   options: string[];
-  type: number;
-  caseForm: TCaseForm,
-  setCaseForm: Dispatch<SetStateAction<TCaseForm>>;
+  type?: number;
+  caseForm?: TCaseForm,
+  setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
 }
 
 const Selector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
@@ -21,11 +21,11 @@ const Selector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (type === 0) {
+    if (caseForm && setCaseForm && type === 0) {
       setCaseForm({...caseForm, open: option==="공개"? true: false})
-    } else if (type === 1) {
+    } else if (caseForm && setCaseForm && type === 1) {
       setCaseForm({...caseForm, region: option})
-    } else if (type === 2) {
+    } else if (caseForm && setCaseForm && type === 2) {
       setCaseForm({...caseForm, type: option})
     }
     setIsOpen(false);

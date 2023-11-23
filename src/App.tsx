@@ -26,7 +26,7 @@ function App() {
             )
           })}
         </Route>
-        <Route element={<MypageLayout />}>
+        <Route element={<MypageLayout children={undefined} />}>
           {MYPAGE_ROUTES.map((route) => {
             return (
               <Route key={route.name} path={route.path()} element={<route.component />} />
