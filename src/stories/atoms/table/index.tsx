@@ -7,7 +7,7 @@ type TTable = {
 
 const Table = ({title, data}: TTable) => {
   return (
-    <table className="table-fixed w-full border-separate rounded-12 overflow-hidden">
+    <table className="table-fixed border-separate rounded-12 overflow-hidden w-full max-w-820">
     <thead className="bg-superSubColor h-45">
       <tr>
         {title.map((item, index) => (
@@ -19,7 +19,7 @@ const Table = ({title, data}: TTable) => {
     </thead>
     <tbody className="bg-gray-50">
         {data.map((item, index) => (
-          <tr>
+          <tr key={`${item.no} ${index}`}>
             <td className="px-12 py-14 text-center text-mainColor text-15" key={`${item}+${index}`}>
               {item.no}
             </td>
