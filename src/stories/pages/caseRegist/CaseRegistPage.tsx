@@ -2,6 +2,7 @@ import { useState } from "react";
 import Title from "../../atoms/title";
 import Selector from "../../molecules/selector";
 import TextArea from "../../molecules/textarea";
+import Modal from "../../atoms/modal";
 
 export type TCaseForm = { 
   open: boolean,
@@ -21,8 +22,12 @@ const CaseRegistPage = () => {
     overview: '',
   })
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   return (
     <div className="flex justify-center">
+      {isModalOpen && <Modal navigateUrl="/" text={"사건이 등록됐습니다."} input={false} setIsModalOpen={setIsModalOpen}/>}
       <div className="bg-white w-full max-w-748 h-full max-h-fit rounded-20 py-20 px-50 mt-30">
         <div className="mt-20"><Title text="사건 등록" /></div>
         <div className="mt-30"><Selector text="시민 공개범위를 선택하세요." options={["비공개","공개"]} type={0} caseForm={caseForm} setCaseForm={setCaseForm} /></div>
@@ -36,7 +41,7 @@ const CaseRegistPage = () => {
         <div className="mt-20">
           <TextArea text="사건 개요를 설명하세요." rows={5} placeholder="대전 서구 둔산동 00아파트에 거주하는 초등학생 여자 아이를 납치하여 피해자 주거지 옥상 기계실에 감금 후, 살해" maxInput={350} type={1} caseForm={caseForm} setCaseForm={setCaseForm}  />
         </div>
-        <div className="flex justify-end"><button className="text-white bg-mainColor px-35 py-10 rounded-16 my-20">등록하기</button></div>
+        <div className="flex justify-end"><button onClick={() => setIsModalOpen(true)} className="text-white bg-mainColor px-35 py-10 rounded-16 my-20">등록하기</button></div>
       </div>
     </div>
   )
