@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import CommonBtn from '../../atoms/commonBtn';
 import './styles.css'
 
 const CaseDetailPage = () => {
+
+  const navigate = useNavigate();
+  // const id: number = 1;
+
   return (
     <div className="flex justify-center">
       <div className="bg-white  w-full max-w-748 h-full max-h-fit rounded-20 py-20 px-50 mt-30">
@@ -26,7 +31,7 @@ const CaseDetailPage = () => {
             눈물을 감추기엔 네가 가여워서 못 버텨
           </div>
         </div>
-        <div className="flex justify-end mt-10"><CommonBtn text="수정하기" /></div>
+        <div className="flex justify-end mt-10"><CommonBtn text="수정하기" onClick={() => navigate(`modifyCase`)} /></div>
       </div>
     </div>
   )
