@@ -11,13 +11,11 @@ const MontagePublicPage = () => {
           <div className="text-20 font-semibold text-white mt-30 mb-20">{montage.crimeCategory}</div>
           <div className="flex flex-wrap gap-20">
             {montage.criminals.map((info) => (
-              <InfoCard key={info.id} name={info.name} age={info.age} imgSrc={info.imgSrc} id={info.id} />
+              <InfoCard key={info.id} imgSrc={info.imgSrc} id={info.id} />
             ))}
           </div>
         </div>
       ))}
-      
-      
     </div>
   )
 }
