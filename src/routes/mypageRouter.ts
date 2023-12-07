@@ -1,4 +1,5 @@
 import MontageCreatePage from "../stories/pages/montageCreate/MontageCreatePage";
+import MontageFirmUp from "../stories/pages/montageFirmUp/MontageFirmUpPage";
 import MyPage from "../stories/pages/my/MyPage";
 import { TRoute } from "../types/commonTypes";
 
@@ -12,6 +13,11 @@ export const MYPAGE_ROUTES_URLS = {
     name: "몽타주 생성페이지",
     path: () => '/createMontage',
     component: MontageCreatePage,
+  },
+  firmUpMontage: {
+    name: "몽타주 확정페이지",
+    path: () => '/firmUpMontage',
+    component: MontageFirmUp,
   }
 } as const;
 
