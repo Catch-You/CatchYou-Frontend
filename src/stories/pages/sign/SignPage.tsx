@@ -8,6 +8,11 @@ import ShortBtn from "../../atoms/shortBtn";
 import { Timer } from "../../../utils/timer";
 import Modal from "../../atoms/modal";
 import { useGetEmailCheck, useGetEmailCode } from "../../../hooks/queries/user/userQueries";
+import { postSignUp } from "../../../api/userApi";
+import { useMutation } from "react-query";
+import { userRoleState } from "../../../recoil";
+import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 const SignPage = () => {
   // client
@@ -20,6 +25,7 @@ const SignPage = () => {
     authCode: '',
   })
 
+  const navigate = useNavigate();
   const { validText, isValid } = useValid(form);
   const [error, setError] = useState(false);
   const [auth, setAuth] = useState(false);
@@ -52,8 +58,9 @@ const SignPage = () => {
   // server
   const { mutate: checkEmail, ok } = useGetEmailCheck();
   const { mutate: checkCode, authCode } = useGetEmailCode();
+  const { mutate: signUp } = useMutation(postSignUp);
+  const userRole = useRecoilValue(userRoleState);
   
-
   useEffect(() => {
     if (authCode) {
       setForm({ ...form, authCode });
@@ -69,14 +76,22 @@ const SignPage = () => {
   const handleCode = () => {
     if (form.code) {
       checkCode(form.email);
-      console.log("인증코드", form.authCode);
-      console.log("사용자입력코드", form.code);
-      console.log("일치하는가 " + isValid.isCode);
     }
   }
 
   const handleClick = () => {
-    setError(!isValid.isEmail || !isValid.isPassword || !isValid.isCode || !isValid.isName || !isValid.isPasswordConfirm);
+    if (isValid.isEmail && isValid.isPassword && isValid.isCode && isValid.isName && isValid.isPasswordConfirm) {
+      signUp({ email: form.email, password: form.password, name: form.name, role: userRole });
+      setIsModalOpen(true)
+      navigate('/login');
+    } else {
+      setError(!isValid.isEmail || !isValid.isPassword || !isValid.isCode || !isValid.isName || !isValid.isPasswordConfirm);
+    }
+  }
+  const modalOpen = () => {
+    if (ok) {
+      setIsModalOpen(true)
+    }
   }
   const modalOpen = () => {
     setIsModalOpen(true)

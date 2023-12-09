@@ -13,3 +13,10 @@ export type TEmailCode = {
   message: string;
   data: string;
 }
+
+export type TSignUp = {
+  email: string;
+  name: string;
+  password: string;
+  role: string;
+}
