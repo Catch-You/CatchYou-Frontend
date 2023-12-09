@@ -20,7 +20,6 @@ const SignPage = () => {
     authCode: '',
   })
 
-  
   const { validText, isValid } = useValid(form);
   const [error, setError] = useState(false);
   const [auth, setAuth] = useState(false);

@@ -12,6 +12,7 @@ export const getEmailCheck = async (email: string) => {
   const res = await $axios.get<TApiResponse<TEmailCheck>>(USER_QUERY_KEYS.EMAIL_DUPLICATE_CHECK(email));
   return res.status;
 }
+
 // 이메일 인증
 export const getEmailCode = async (email: string) => {
   const res = await $axios.get<TApiResponse<TEmailCode>>(USER_QUERY_KEYS.EMAIL_AUTHENTICATION(email));

@@ -5,7 +5,6 @@ import { useState } from "react";
 export const USER_QUERY_KEYS = {
   emailCode: () => ["emailCode"],
 } as const;
-
 // 이메일 중복 체크
 export const useGetEmailCheck = () => {
   const [ok, setOk] = useState<boolean | null>(null);
