@@ -9,7 +9,7 @@ type TValid = {
 }
 
 const useValid = (changeValue: TValid) => {
-  console.log(changeValue, '현재 벨류')
+  // console.log(changeValue, '현재 벨류')
   const [validText, setValidText] = useState({
     email: '',
     password: '',
