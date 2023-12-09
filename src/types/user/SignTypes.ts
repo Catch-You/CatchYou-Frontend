@@ -9,7 +9,7 @@ export type TEmailCheck = {
   data?: null | string;
 }
 
-// export type TEmailCode = {
-//   message: string;
-//   data: string;
-// }
+export type TEmailCode = {
+  message: string;
+  data: string;
+}

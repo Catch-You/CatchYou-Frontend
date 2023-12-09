@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 type TValid = {
   email: string,
   password: string,
-  code?: number,
+  code?: string,
+  authCode?: string,
   name?: string,
   repassword?: string
 }
@@ -45,6 +46,11 @@ const useValid = (changeValue: TValid) => {
     return exp.test(name);
   };
 
+  // 서버에서 받은 code와 사용자입력 code가 같은지 체크하는 유효성 로직
+  const validCode = (code: string, authCode: string) => {
+    return code === authCode
+  }
+
   useEffect(() => {
     setValidText({
       ...validText,
@@ -52,19 +58,17 @@ const useValid = (changeValue: TValid) => {
       password: changeValue.password? (validatePassword(changeValue.password) ? '' : '비밀번호 형식이 올바르지 않습니다.'):'',
       repassword: changeValue.repassword? (changeValue.password === changeValue.repassword ? '' : '비밀번호가 일치하지 않습니다.'): '',
       name: changeValue.name ? (validateName(changeValue.name) ? '' : '특수문자와 숫자를 제외한 실명을 입력해주세요.'): '',
-      code: '코드가 인증되었습니다.'
+      code: changeValue.authCode && changeValue.code? (validCode(changeValue.code, changeValue.authCode) ? '': '코드가 일치하지않습니다.'): '',
     });
 
     setIsValid({
       isEmail: validateEmail(changeValue.email),
       isPassword: validatePassword(changeValue.password),
       isName:  changeValue.name ? validateName(changeValue.name) : true,
-      isCode: false,
+      isCode: changeValue.code && changeValue.authCode ? validCode(changeValue.code, changeValue.authCode): false,
       isPasswordConfirm: changeValue.password === changeValue.repassword,
     });
   }, [changeValue]);
-
-  // TODO: 서버에서 받은 code와 사용자입력 code가 같은지 체크하는 유효성 로직
 
   return { validText, isValid };
 }
