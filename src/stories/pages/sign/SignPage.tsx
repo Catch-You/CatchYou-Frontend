@@ -60,9 +60,7 @@ const SignPage = () => {
   const { mutate: checkCode, authCode } = useGetEmailCode();
   const { mutate: signUp } = useMutation(postSignUp);
   const userRole = useRecoilValue(userRoleState);
-
   
-
   useEffect(() => {
     if (authCode) {
       setForm({ ...form, authCode });
@@ -94,6 +92,9 @@ const SignPage = () => {
     if (ok) {
       setIsModalOpen(true)
     }
+  }
+  const modalOpen = () => {
+    setIsModalOpen(true)
   }
 
   return (
