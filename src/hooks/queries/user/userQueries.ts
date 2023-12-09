@@ -1,6 +1,10 @@
 import { useMutation } from "react-query"
-import { getEmailCheck } from "../../../api/userApi"
+import { getEmailCheck, getEmailCode } from "../../../api/userApi"
 import { useState } from "react";
+
+export const USER_QUERY_KEYS = {
+  emailCode: () => ["emailCode"],
+} as const;
 
 // 이메일 중복 체크
 export const useGetEmailCheck = () => {
@@ -17,3 +21,15 @@ export const useGetEmailCheck = () => {
   return { mutate: mutation.mutate, ok }; 
 }
 
+// 이메일 인증
+export const useGetEmailCode = () => {
+  const [authCode, setAuthCode] = useState<string | null>(null);
+  const mutation = useMutation(getEmailCode, {
+    onSuccess: (data) => {
+      setTimeout(() => {
+        setAuthCode(data.data.toString());
+      }, 2000); 
+    },
+  });
+  return { mutate: mutation.mutate, authCode }; 
+}
