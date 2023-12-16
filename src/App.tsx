@@ -6,7 +6,6 @@ import MypageLayout from "./stories/template/common/MypageLayout";
 import { MYPAGE_ROUTES } from "./routes/mypageRouter";
 import { NOT_LAYOUT_ROUTES } from "./routes/notLayoutRouter";
 import { LAYOUT_ROUTES } from "./routes/layoutRouter";
-
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Suspense, useEffect } from "react";
@@ -87,7 +86,6 @@ function MyComponent() {
         </BrowserRouter>
         </QueryClientProvider>
         </Suspense>
-    
   )
 }
 

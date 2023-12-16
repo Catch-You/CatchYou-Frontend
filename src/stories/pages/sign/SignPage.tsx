@@ -61,10 +61,7 @@ const SignPage = () => {
   const { mutate: signUp } = useMutation(postSignUp);
   const userRole = useRecoilValue(userRoleState);
 
-  
-
   useEffect(() => {
-
     if (authCode) {
       setForm({ ...form, authCode });
     }

@@ -1,7 +1,6 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-
 const { persistAtom } = recoilPersist();
 
 export const userRoleState = atom({
@@ -20,4 +19,3 @@ export const userLoginState = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 })
-
