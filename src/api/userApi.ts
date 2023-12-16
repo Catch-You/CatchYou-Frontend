@@ -49,6 +49,8 @@ export const getToken = async () => {
   const res = await $axios.get<TApiResponse<TLoginRes>>(USER_QUERY_KEYS.RE_TOKEN());
   if (res.data.code !== 200) {
     toast.error("토큰 재발급 실패")
+  } else {
+    const token = res.data.data.refreshToken;
+    $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } 
-  return res.data;
 }

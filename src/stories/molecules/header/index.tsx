@@ -1,9 +1,11 @@
 import { useRecoilValue } from 'recoil';
 import  context  from '../../assets/context.png'
 import TranslateBtn from '../../atoms/translateBtn';
+import PersonIcon from '@mui/icons-material/Person';
 import { userInfoState, userLoginState } from '../../../recoil';
 
 const Header = () => {
+
   const isLoggedIn = useRecoilValue(userLoginState);
 
   const userInfo = useRecoilValue(userInfoState); 
@@ -17,7 +19,7 @@ const Header = () => {
       </a>
       <div className='flex items-center gap-5'>
         <TranslateBtn />
-        {isLoggedIn ? <div className='font-semibold text-16'>({role} / {userInfo.userName}님)</div> : <a href='/login' className='font-semibold text-16'>로그인</a>}
+        {isLoggedIn ? <a href='/mypage' className='font-semibold text-16 flex items-center cursor-pointer'><PersonIcon sx={{ fontSize: 28 }} />({role} / {userInfo.userName}님)</a> : <a href='/login' className='font-semibold text-16'>로그인</a>}
       </div>
     </div>
   )
