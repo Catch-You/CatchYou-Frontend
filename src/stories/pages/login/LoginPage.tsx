@@ -6,7 +6,7 @@ import Longfield from "../../molecules/longfield";
 import NoticeMsg from "../../atoms/noticeMsg";
 import { useMutation } from "react-query";
 import { postLogin } from "../../../api/userApi";
-import { userLoginState } from "../../../recoil";
+import { userInfoState, userLoginState } from "../../../recoil";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,8 @@ const LoginPage = () => {
   const { validText, isValid } = useValid(form);
   const [error, setError] = useState(false);
   const [, setIsLoggedIn] = useRecoilState(userLoginState); 
-
+  const [, setUserInfo] = useRecoilState(userInfoState); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!form.email || !form.password) {
@@ -27,17 +28,20 @@ const LoginPage = () => {
     }
   }, [form])
 
+  // server
+  const { mutate: login } = useMutation(postLogin, {
+    onSuccess: (data) => {
+      const { userName, role } = data;
+      setIsLoggedIn(true); 
+      setUserInfo({userName, role})
+      navigate('/');
+    }
+  });
+
   const handleClick = () => {
     setError(!isValid.isEmail || !isValid.isPassword);
-    console.log({ email: form.email, password: form.password }, "확인")
     login({ email: form.email, password: form.password })
-    setIsLoggedIn(true);
-    navigate('/')
   }
-
-  // server
-  const { mutate: login } = useMutation(postLogin);
-  const navigate = useNavigate();
 
   return(
     <div className="flex justify-center mt-115">

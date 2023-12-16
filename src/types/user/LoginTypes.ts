@@ -8,11 +8,11 @@ export type TLoginRes = {
   refreshToken: string;
   userId: number;
   accessTokenExpireDate: number;
-  name: string;
+  userName: string;
   role: string;
 }
 
 export type TUserInfo = {
-  name: string;
+  userName: string;
   role: string;
 }
