@@ -5,6 +5,7 @@ import TextArea from "../../molecules/textarea";
 import Modal from "../../atoms/modal";
 
 export type TCaseForm = { 
+  title: string,
   open: boolean,
   region: string,
   type: string,
@@ -15,6 +16,7 @@ export type TCaseForm = {
 const CaseModifyPage = () => {
 
   const [caseForm, setCaseForm] = useState<TCaseForm>({
+    title: '',
     open: false,
     region: '',
     type: '',
@@ -29,7 +31,10 @@ const CaseModifyPage = () => {
       {isModalOpen && <Modal navigateUrl="/" text={"사건이 등록됐습니다."} input={false} setIsModalOpen={setIsModalOpen}/>}
       <div className="bg-white w-full max-w-748 h-full max-h-fit rounded-20 py-20 px-50 mt-30">
         <div className="mt-20"><Title text="사건 등록" /></div>
-        <div className="mt-30"><Selector text="시민 공개범위를 선택하세요." options={["비공개","공개"]} type={0} caseForm={caseForm} setCaseForm={setCaseForm} /></div>
+        <div className="mt-30">
+          <TextArea text="사건 제목을 입력하세요." rows={1} placeholder="어금니 아빠 사건" maxInput={20} type={2} caseForm={caseForm} setCaseForm={setCaseForm}  />
+        </div>
+        <div className="mt-15"><Selector text="시민 공개범위를 선택하세요." options={["비공개","공개"]} type={0} caseForm={caseForm} setCaseForm={setCaseForm} /></div>
         <div className="mt-20 flex gap-20">
           <Selector text="사건 발생 지역을 선택하세요." options={["서울","인천","경기"]} type={1} caseForm={caseForm} setCaseForm={setCaseForm} />
           <Selector text="범죄 종류를 선택하세요." options={["살인","성범죄","절도범죄","폭력범죄"]} type={2} caseForm={caseForm} setCaseForm={setCaseForm} />

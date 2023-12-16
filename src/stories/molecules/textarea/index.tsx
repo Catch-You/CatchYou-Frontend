@@ -12,10 +12,12 @@ type TTextArea = {
   setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
 }
 
+// type - 0: 인상착의, 1: 사건 개요, 2: 사건 타이틀
+
 const TextArea = ({text, rows, maxInput, placeholder, type, bgColor, caseForm, setCaseForm}: TTextArea) => {
   const [inputCount, setInputCount] = useState(0);
 
-const onTextareaHandler = (input: string) => {
+  const onTextareaHandler = (input: string) => {
     setInputCount(
       input.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, "$&").length
     );
@@ -23,7 +25,9 @@ const onTextareaHandler = (input: string) => {
       setCaseForm({...caseForm, impressive: input})
     } else if (caseForm && setCaseForm && type === 1) {
       setCaseForm({...caseForm, overview: input})
-    }
+    }  else if (caseForm && setCaseForm && type === 2) {
+      setCaseForm({...caseForm, title: input})
+    } 
     
   };
   return (
