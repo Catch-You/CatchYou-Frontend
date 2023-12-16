@@ -5,6 +5,11 @@ export const userRoleState = atom({
   default: "",
 })
 
+export const userInfoState = atom({
+  key: "userInfo",
+  default: {userName: "", role: ""},
+})
+
 export const userLoginState = atom({
   key: "isLoggedIn",
   default: false,
