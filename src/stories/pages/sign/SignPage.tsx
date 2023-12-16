@@ -60,7 +60,7 @@ const SignPage = () => {
   const { mutate: checkCode, authCode } = useGetEmailCode();
   const { mutate: signUp } = useMutation(postSignUp);
   const userRole = useRecoilValue(userRoleState);
-  
+
   useEffect(() => {
     if (authCode) {
       setForm({ ...form, authCode });
@@ -70,7 +70,9 @@ const SignPage = () => {
   const handleMail = () => {
     if (isValid.isEmail) {
       checkEmail(form.email)
+      checkCode(form.email);
     }
+    console.log("인증코드", authCode)
   }
 
   const handleCode = () => {
@@ -83,6 +85,7 @@ const SignPage = () => {
     if (isValid.isEmail && isValid.isPassword && isValid.isCode && isValid.isName && isValid.isPasswordConfirm) {
       signUp({ email: form.email, password: form.password, name: form.name, role: userRole });
       setIsModalOpen(true)
+      console.log({ email: form.email, password: form.password, name: form.name, role: userRole })
       navigate('/login');
     } else {
       setError(!isValid.isEmail || !isValid.isPassword || !isValid.isCode || !isValid.isName || !isValid.isPasswordConfirm);
@@ -92,9 +95,6 @@ const SignPage = () => {
     if (ok) {
       setIsModalOpen(true)
     }
-  }
-  const modalOpen = () => {
-    setIsModalOpen(true)
   }
 
   return (

@@ -3,6 +3,7 @@ import SmallSelector from "../../molecules/smallselector";
 
 
 const MyPage = () => {
+  
   return (
     <div className="flex flex-col">
     <div className="flex justify-end"><SmallSelector text="공개여부" options={["공개","비공개"]} /></div>
