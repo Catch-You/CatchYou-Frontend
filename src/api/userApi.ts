@@ -29,19 +29,19 @@ export const postSignUp = async (params: TSignUp) => {
 }
 
 // 로그인
-export const postLogin = async (params: TLogin) => {
-  const res = await $axios.post(USER_QUERY_KEYS.LOGIN(), params)
-
+export const postLogin = async (params: TLogin): Promise<{ userName: string; role: string }> => {
   try {
-    const { accessToken } = res.data.accessToken;
-    const { accessTokenExpireDate } = res.data.accessTokenExpireDate
+    const res = await $axios.post(USER_QUERY_KEYS.LOGIN(), params)
+    const { accessToken, accessTokenExpireDate, userName, role } = res.data
+
     // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
     $axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     setTimeout(getToken, (accessTokenExpireDate - 60) * 1000);
+    return { userName, role };
   } catch (err) {
-    toast.error("로그인 실패")
+    toast.error("로그인 실패");
+    throw err;
   }
-  return res.data;
 }
 
 // 토큰 재발급, 자동 새로고침
