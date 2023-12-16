@@ -3,6 +3,7 @@ import InfoCard from "../../atoms/infoCard"
 import { montageMock } from "../../../mocks/montagePublic/montageCard"
 
 const MontagePublicPage = () => {
+  
   return(
     <div>
       <div className="mt-20"><Category /></div>
