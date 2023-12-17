@@ -20,8 +20,8 @@ export type TCaseDetail = {
   crimeType: string;
   status: string;
   selectStatus: string;
-  createdAt: string;
-  updatedAt?: string;
+  createdAt?: string;
+  updatedAt: string;
   montageId?: number;
   directorId?: number;
   directorName?: string;
