@@ -10,8 +10,10 @@ const CaseDetailPage = () => {
   return (
     <div className="flex justify-center">
       <div className="bg-white  w-full max-w-748 h-full max-h-fit rounded-20 py-20 px-50 mt-30">
+        <div className='flex items-center gap-4 mt-20'><div className='text-mainColor font-semibold text-20 bg-superSubColor w-fit px-20 py-4 rounded-15'>어금니 아빠 사건</div><span className='mt-5 text-mainColor'>| 서울</span></div>
+        
         <div className="flex gap-8 mt-20">
-          <div className="montage"><div className='region'>서울</div></div>
+          <div className="montage"><div className='region'>강간</div></div>
           <div>
             <div className='text-mainColor font-semibold text-20'>인상착의</div>
             <div className='mt-5 border-2 border-superSubColor w-full max-w-360 h-215 rounded-12 px-14 py-16'>
