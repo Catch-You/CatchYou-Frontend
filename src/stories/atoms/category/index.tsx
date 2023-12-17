@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TYPE_OF_REGION } from "../../../constants/case";
-import { useGetMontagePublic } from "../../../hooks/queries/montage/montageQueries";
 
 
 type TCategory = {
