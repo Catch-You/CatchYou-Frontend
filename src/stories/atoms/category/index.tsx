@@ -1,18 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TYPE_OF_REGION } from "../../../constants/case";
+import { useGetMontagePublic } from "../../../hooks/queries/montage/montageQueries";
 
-const Category = () => {
+
+type TCategory = {
+  setRegion: (region: string) => void;
+}
+
+const Category = ({setRegion}:TCategory) => {
 
   const regionOptions = Object.values(TYPE_OF_REGION);
-  const [, setActiveCategory]  = useState(0);
+  const [activeCategory, setActiveCategory]  = useState(0);
 
+
+  const handleRegionChange = (local: string, index: number) => {
+    setActiveCategory(index);
+    setRegion(local);
+  };
   return (
     <div className="flex gap-4 overflow-auto flex-wrap">
       {regionOptions.map((local, index) => (
         <span 
           key={local} 
-          className="px-20 py-8 text-15 font-medium text-black border bg-white border-subColor rounded-30 hover:bg-subColor hover:text-white focus:bg-subColor focus:text-white"
-          onClick={() => setActiveCategory(index)}
+                className={`${activeCategory === index ? 'bg-subColor text-white' : 'text-black bg-white'} px-20 py-8 text-15 font-medium border border-subColor rounded-30 `}
+          onClick={() => handleRegionChange(local, index)}
           >
           {local}
         </span>
