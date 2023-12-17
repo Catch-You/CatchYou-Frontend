@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Category from "./Category";
+import  Category  from '.';
 
 const meta: Meta<typeof Category> = {
   title: 'atoms/Category',

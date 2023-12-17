@@ -12,7 +12,6 @@ const MontagePublicPage = () => {
   // server
   const { data: montages, refetch } = useGetMontagePublic(region);
 
-  // 지역이 변경될 때 데이터 refetch
   useEffect(() => {
     const fetchData = async () => {
       await refetch();
