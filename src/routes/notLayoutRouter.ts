@@ -1,7 +1,6 @@
 import CaseDetailPage from "../stories/pages/caseDetail/CaseDetailPage";
 import CaseModifyPage from "../stories/pages/caseModify/CaseModifyPage";
 import CaseRegistPage from "../stories/pages/caseRegist/CaseRegistPage";
-import EnterCodePage from "../stories/pages/enterCode/EnterCodePage";
 import LoginPage from "../stories/pages/login/LoginPage";
 import SignMemberPage from "../stories/pages/sign/SignMemberPage";
 import SignPage from "../stories/pages/sign/SignPage";
@@ -22,11 +21,6 @@ export const NOT_LAYOUT_ROUTES_URLS = {
     name: "회원가입 페이지",
     path: () => '/join',
     component: SignPage,
-  },
-  enterCodePage: {
-    name: "사건코드 입력 페이지",
-    path: () => '/incidentCode',
-    component: EnterCodePage,
   },
   caseRegisterPage: {
     name: "사건 등록 페이지",
