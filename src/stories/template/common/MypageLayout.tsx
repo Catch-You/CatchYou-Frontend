@@ -15,8 +15,8 @@ const MypageLayout: React.FC<Props> = ({ ...props }) => {
   return (
     <div className="max-w-1440 min-h-screen h-full flex flex-col" {...props}>
       <Header />
-      <div className="flex flex-wrap flex-col px-70 bg-mainColor pt-10 pb-50">
-        <div className="bg-white h-full min-h-600 px-40 mt-20 rounded-20 ">
+      <div className="flex flex-wrap flex-col px-70 bg-mainColor pt-10 pb-50 ">
+        <div className="bg-white h-full min-h-580 max-h-600 px-40 mt-20 rounded-20 overflow-auto">
           <div className="flex py-20 w-full">
             <div className="mt-35 w-250">
               <div className="text-20 font-semibold">{role} / {userInfo.userName}님</div>
