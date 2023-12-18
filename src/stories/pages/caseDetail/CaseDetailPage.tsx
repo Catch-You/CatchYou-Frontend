@@ -2,11 +2,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CommonBtn from '../../atoms/commonBtn';
 import './styles.css'
 import { useGetMontageDetail } from '../../../hooks/queries/montage/montageQueries';
+import { useRecoilValue } from 'recoil';
+import { userInfoState } from '../../../recoil';
 
 const CaseDetailPage = () => {
 
   const navigate = useNavigate();
   const { id: caseId } = useParams();
+  const role = useRecoilValue(userInfoState);
+  const userRole = role.role === 'ROLE_POLICE' ? true: false;
 
   //server
   const { data: caseDetail } = useGetMontageDetail(Number(caseId));
@@ -38,13 +42,13 @@ const CaseDetailPage = () => {
             </div>
           </div>
         </div>
-        <div>
+        <>
           <div className='text-mainColor font-semibold text-20 mt-20'>사건개요</div>
-          <div className='mt-5 border-2 border-superSubColor w-full h-140 rounded-12 px-14 py-16'>
+          <div className='mt-5 border-2 border-superSubColor w-full h-140 rounded-12 px-14 py-16 mb-20'>
             {caseDetail.summary}
           </div>
-        </div>
-        <div className="flex justify-end mt-10"><CommonBtn text="수정하기" onClick={() => navigate(`modifyCase`)} /></div>
+        </>
+        {userRole && <div className="flex justify-end mt-10"><CommonBtn text="수정하기" onClick={() => navigate(`modifyCase`, { state: { caseDetail, caseId} })} /></div>}
       </div>)}
     </div>
   )
