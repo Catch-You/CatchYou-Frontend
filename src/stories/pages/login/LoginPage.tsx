@@ -44,11 +44,7 @@ const LoginPage = () => {
     setError(!isValid.isEmail || !isValid.isPassword);
     login({ email: form.email, password: form.password })
   }
-
-  // server
-  const { mutate: login } = useMutation(postLogin);
-  const navigate = useNavigate();
-
+  
   return(
     <div className="flex justify-center mt-115">
       <form className="w-full max-w-480 rounded-20 bg-white px-40 py-40" onSubmit={(e) => e.preventDefault()}>
