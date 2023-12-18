@@ -42,6 +42,7 @@ export type TMyCase = {
   crimeType: string;
   status: string;
   selectStatus: string;
+  criminalCode: string;
 }
 
 // 사건 코드 응답
