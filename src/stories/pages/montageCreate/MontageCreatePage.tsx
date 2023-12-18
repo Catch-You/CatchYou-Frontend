@@ -13,8 +13,11 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../../recoil';
 import { TMontageCreate } from '../../../types/montage/montageCreate';
 import spinner from '../../../assets/rollingSpinner.gif';
+import { useNavigate } from 'react-router-dom';
 
 const MontageCreatePage = () => {
+  const navigate = useNavigate();
+
   const [recreate, setRecreate] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCode, setUserCode] = useState('');
@@ -60,7 +63,7 @@ const MontageCreatePage = () => {
         <div className='flex flex-col justify-center items-center border border-superSubColor px-100 h-full min-h-500 w-full max-w-550 rounded-16'>
           {loading ? (<img src={spinner} alt='로딩' />)
             : ( recreate?  (<>
-            <div className="montageNew mb-10" style={{ backgroundImage: `url(https://diffusion-ml.s3.ap-northeast-2.amazonaws.com/${montageId}.png)`, opacity:1, width: 250, height: 250}}></div><CommonBtn text="재생성하기" onClick={handleClick} /> <CommonBtn text="확정하기" />
+            <div className="montageNew mb-10" style={{ backgroundImage: `url(https://diffusion-ml.s3.ap-northeast-2.amazonaws.com/${montageId}.png)`, opacity:1, width: 250, height: 250}}></div><CommonBtn text="재생성하기" onClick={handleClick} /> <CommonBtn text="확정하기" onClick={()=> navigate('/firmUpMontage', { state: { interviewId } })}/>
             </>):(<><div className="montageNew mb-10"></div><CommonBtn text="생성하기" onClick={handleClick} /> </>))
           }      
         </div>

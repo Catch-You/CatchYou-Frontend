@@ -36,3 +36,8 @@ export type TMontageDetail = {
   updatedAt: string;
   montageId: number;
 }
+
+// 생성된 몽타주 리스트 조회
+export type TMontageListAll = {
+  interviewMontageListDtos: {id: number}[];
+}

@@ -1,11 +1,12 @@
 import { $axios } from "../lib/axios";
 import { TApiResponse } from "../types/commonTypes";
-import { TMontageDetail, TMontagePublic } from "../types/montage/montagePublic";
+import { TMontageDetail, TMontageListAll, TMontagePublic } from "../types/montage/montagePublic";
 
 const MONTAGE_QUERY_KEYS = {
   MONTAGE_PUBLIC: (region: string = "서울") => `/criminal/open?region=${region || "서울"}`,
   MONTAGE_DETAIL: (caseId: number) => `/criminal/open/${caseId}`,
   MONTAGE_CREATE: (interviewId: number) => `/montage/create/${interviewId}`,
+  MONTAGE_ALL: (interviewId: number) => `/interview/montages/${interviewId}`,
 } as const;
 
 // 지역별 공개 몽타주 조회
@@ -28,5 +29,15 @@ export const postMontageCreate = async (interviewId:number, auth:string, prompt:
       Authorization: `Bearer ${auth}`,
     }
   });
+  return res.data;
+}
+
+// 현재까지 생성된 몽타주 조회
+export const getMontageAll = async (interviewId: number, auth: string) => {
+  const res = await $axios.get<TMontageListAll>(MONTAGE_QUERY_KEYS.MONTAGE_ALL(interviewId), {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    }
+  })
   return res.data;
 }
