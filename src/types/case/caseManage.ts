@@ -26,3 +26,20 @@ export type TCaseDetail = {
   directorId?: number;
   directorName?: string;
 }
+
+// 내가 담당한 사건 리스트
+export type TMyCaseList = {
+  criminalListDtos: TMyCase[];
+  confirmedCriminalListDtos?: TMyCase[];
+}
+
+// 내가 담당한 사건 정보
+export type TMyCase = {
+  id: number;
+  userId: number;
+  userName: string;
+  title: string;
+  crimeType: string;
+  status: string;
+  selectStatus: string;
+}
