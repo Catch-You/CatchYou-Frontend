@@ -1,20 +1,23 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { TCaseForm } from '../../pages/caseRegist/CaseRegistPage';
+import { TCaseForm } from '../../../types/case/caseList';
 
 type TSelector = {
   text: string;
   options: string[];
+  selectedValue?: string;
+  status?: string;
   type?: number;
   caseForm?: TCaseForm,
   setSex?: (value: string) => void;
+  setStatus?: (value: string) => void;
   setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
 }
 
-const Selector = ({text, options, type, caseForm, setCaseForm, setSex }: TSelector) => {
+const Selector = ({text, options, type, caseForm, selectedValue, status, setStatus, setCaseForm, setSex }: TSelector) => {
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [selectedOption, setSelectedOption] = useState<string>(selectedValue? selectedValue : '');
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
@@ -22,28 +25,24 @@ const Selector = ({text, options, type, caseForm, setCaseForm, setSex }: TSelect
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
-    if (caseForm && setCaseForm && type === 0) {
-      setCaseForm({...caseForm, open: option==="공개"? true: false})
+    if (status && setStatus && type === 0) {
+      setStatus(option === "공개"? 'Y': 'N')
     } else if (caseForm && setCaseForm && type === 1) {
       setCaseForm({...caseForm, region: option})
     } else if (caseForm && setCaseForm && type === 2) {
-      setCaseForm({...caseForm, type: option})
+      setCaseForm({...caseForm, crimeType: option})
     } else if (setSex && type === 99) {
       setSex(option)
     }
     setIsOpen(false);
   };
 
-  const handleSelectClick = (e: React.MouseEvent<HTMLSelectElement>) => {
-    e.preventDefault(); // 시스템 기본 동작 막기
-    handleToggle(); // 드롭다운 토글
-  };
 
   return (
     <div className="flex flex-col gap-2">
       <div>{text}</div>
       <div className='relative'>
-        <select className='w-193 rounded-12 border-2 border-superSubColor px-14 py-10 appearance-none' onClick={handleSelectClick} onChange={(e) => setSelectedOption(e.target.value)} >
+        <select className='w-193 rounded-12 border-2 border-superSubColor px-14 py-10 appearance-none' onClick={handleToggle} onChange={(e) => setSelectedOption(e.target.value)} >
           <option>
             {selectedOption ? selectedOption : '옵션을 선택하세요'}
           </option>

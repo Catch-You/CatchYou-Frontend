@@ -8,16 +8,7 @@ import { useMutation } from "react-query";
 import { TYPE_OF_CRIME, TYPE_OF_REGION } from "../../../constants/case";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil";
-import { TCaseRegist } from "../../../types/case/caseManage";
-
-export type TCaseForm = { 
-  title: string,
-  open?: boolean,
-  region: string,
-  type: string,
-  impressive: string,
-  overview: string,
-}
+import { TCaseForm } from "../../../types/case/caseList";
 
 const CaseRegistPage = () => {
   
@@ -26,26 +17,27 @@ const CaseRegistPage = () => {
 
   const [caseForm, setCaseForm] = useState<TCaseForm>({
     title: '',
-    open: false,
     region: '',
-    type: '',
-    impressive: '',
-    overview: '',
+    crimeType: '',
+    description: '',
+    summary: '',
   })
+
+
 
   const auth = useRecoilValue(userState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegister = () => {
-    setIsModalOpen(true);
-    caseRegist({title: caseForm.title, summary: caseForm.overview, description: caseForm.impressive, region:caseForm.region, crimeType: caseForm.type}, auth)
+    console.log('caseForm',caseForm)
+    caseRegist({title: caseForm.title, summary: caseForm.summary, description: caseForm.description, region:caseForm.region, crimeType: caseForm.crimeType}, auth)
   }
 
   // server
-  const { mutate: caseRegist } = useMutation((params: TCaseRegist) => postCase(params, auth), {
+  const { mutate: caseRegist } = useMutation((params: TCaseForm) => postCase(params, auth), {
     onSuccess: () => {
       setIsModalOpen(true);
-    },});
+  },});
 
 
   return (

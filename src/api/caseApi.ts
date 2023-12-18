@@ -1,10 +1,12 @@
 import { $axios } from "../lib/axios";
-import { TCaseDetail, TCaseRegist, TMyCaseList } from "../types/case/caseManage";
+import { TCaseForm, TCaseModifyForm } from "../types/case/caseList";
+import { TCaseDetail, TMyCaseList } from "../types/case/caseManage";
 import { TApiResponse } from "../types/commonTypes";
 
 
 const CASE_QUERY_KEYS = {
   CASE_REGIST: () => '/criminal/police',
+  CASE_MODIFY: (caseId: number) => `/criminal/police/${caseId}`,
   CASE_DETAIL: (id: number) => `/criminal/police/${id}`,
   MY_CASE: (role: string) => `/criminal/${role}/myList`,
   CASE_CODE: (code: string) => `/criminal/director/confirm-code/${code}`,
@@ -12,7 +14,7 @@ const CASE_QUERY_KEYS = {
 } as const;
 
 // 사건 등록
-export const postCase = async (params: TCaseRegist, auth: string) => {
+export const postCase = async (params: TCaseForm, auth: string) => {
   return $axios.post(CASE_QUERY_KEYS.CASE_REGIST(), params, {
     headers: {
       Authorization: `Bearer ${auth}`,
@@ -24,6 +26,21 @@ export const postCase = async (params: TCaseRegist, auth: string) => {
 export const getCaseDetail = async (id: number) => {
   const res = await $axios.get<TApiResponse<TCaseDetail>>(CASE_QUERY_KEYS.CASE_DETAIL(id))
   return res.data;
+}
+
+// 사건 수정
+export const putCase = async (params: TCaseModifyForm, caseId: number, auth: string) => {
+  const res = await $axios.put(CASE_QUERY_KEYS.CASE_MODIFY(caseId), params, {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    }
+  })
+  if (res.status == 200) {
+    return res.data;
+  }
+  if (!res.data.success) {
+    throw new Error(res.data.reason);
+  }
 }
 
 // 내가 담당한 사건 리스트 조회
