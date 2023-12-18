@@ -4,6 +4,7 @@ import './styles.css'
 import { useGetMontageDetail } from '../../../hooks/queries/montage/montageQueries';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../../../recoil';
+import { createDate } from '../../../utils/datepick';
 
 const CaseDetailPage = () => {
 
@@ -14,12 +15,6 @@ const CaseDetailPage = () => {
 
   //server
   const { data: caseDetail } = useGetMontageDetail(Number(caseId));
-
-  // 작성날짜만을 뽑아내는 정규식
-  const createDate = (date: string) => {
-    const match = date.match(/^(\d{4}-\d{2}-\d{2})/);
-    return match && match[1];
-  }
 
   return (
     <div className="flex justify-center">
