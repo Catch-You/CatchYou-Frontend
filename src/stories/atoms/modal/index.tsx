@@ -2,7 +2,7 @@ import { useRef } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { postCaseCode } from "../../../api/caseApi";
+import { postCaseCode, postInterviewCreate } from "../../../api/caseApi";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../recoil";
 import toast from "react-hot-toast";
@@ -15,16 +15,24 @@ export type TModal = {
   userCode?: string;
   setIsModalOpen: (value: boolean) => void;
   setUserCode?: (value: string) => void;
+  setInterviewId?: (value: number) => void;
   navigateUrl?: string;
 }
 
-const Modal = ({text, input, userCode, setIsModalOpen, setUserCode, navigateUrl}: TModal) => {
+const Modal = ({text, input, userCode, setIsModalOpen, setUserCode, setInterviewId, navigateUrl}: TModal) => {
 
   const auth = useRecoilValue(userState);
-  // 사건 코드 확인
+  // 사건 코드 확인 
+  // success: 인터뷰 생성 api에서 인터뷰 아이디 가져오기
+  // fail: 사건 코드 제대로 할 때까지 접근 불가
   const { mutate: codeCheck } = useMutation((data: {code: string, auth: string}) => postCaseCode(data.code, data.auth), {
-  onSuccess: () => {
+  onSuccess: (res) => {
     toast("승인되었습니다.")
+    if(setInterviewId) { 
+      postInterviewCreate(res.data, auth).then((response) => {
+      setInterviewId(response.data)
+    })
+    }
     setIsModalOpen(false);
   },
   onError: (error: AxiosError<TCaseCodeRes>) => {

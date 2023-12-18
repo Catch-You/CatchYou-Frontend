@@ -4,23 +4,32 @@ import Selector from '../../molecules/selector';
 import TextArea from '../../molecules/textarea';
 import './styles.css'
 import Modal from '../../atoms/modal';
+// import { useRecoilValue } from 'recoil';
+// import { userState } from '../../../recoil';
 
 const MontageCreatePage = () => {
   const [recreate, setRecreate] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCode, setUserCode] = useState('');
+  const [interviewId, setInterviewId] = useState(0);
+  // const auth = useRecoilValue(userState);
+
+  // // server
+  // const interviewCreate = postInterviewCreate(caseId, auth);
 
   const handleClick = () => {
     setRecreate(true);
   }
 
   useEffect(() => {
-    setIsModalOpen(true);
+    if (interviewId === 0 ) {
+      setIsModalOpen(true);
+    }
   }, []);
 
   return (
       <div className='flex gap-4 pl-20 w-full'>
-        {isModalOpen && <Modal text={"사건 코드를 입력하세요."} input={true} setIsModalOpen={setIsModalOpen} userCode={userCode} setUserCode={setUserCode} />}
+        {isModalOpen && <Modal text={"사건 코드를 입력하세요."} input={true} setIsModalOpen={setIsModalOpen} userCode={userCode} setUserCode={setUserCode} setInterviewId={setInterviewId} />}
         <div className='flex flex-col justify-center items-center border border-superSubColor px-100 h-full min-h-500 w-full max-w-550 rounded-16'>
           {recreate ? ( 
             <>
