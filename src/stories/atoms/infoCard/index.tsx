@@ -9,7 +9,9 @@ type TInfoCard = {
 const InfoCard = ({montageId, caseId, title}: TInfoCard) => {
   const navigate = useNavigate();
   const handleClick = ()  => {
-    navigate(`/${caseId}`)
+    if (title) {
+      navigate(`/${caseId}`)
+    }
   }
   return (
     <div className="w-200 h-200 rounded-lg bg-white flex flex-col mb-50" onClick={handleClick}>
