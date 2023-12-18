@@ -7,12 +7,10 @@ import { MYPAGE_ROUTES } from "./routes/mypageRouter";
 import { NOT_LAYOUT_ROUTES } from "./routes/notLayoutRouter";
 import { LAYOUT_ROUTES } from "./routes/layoutRouter";
 
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { userLoginState } from "./recoil";
-import { getToken } from "./api/userApi";
 
 function App() {
   return (
@@ -23,7 +21,6 @@ function App() {
 }
   
 function MyComponent() {
-  const isLoggedIn = useRecoilValue(userLoginState);
 
   const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,17 +31,10 @@ function MyComponent() {
       retryOnMount: false,
     },
   },
-});
-
-  // 로그인 상태에서 어플리케이션이 마운트 될 때 retoken 호출
-  useEffect(() => {
-    if (isLoggedIn) {
-      getToken();
-    }
-  }, []);
+  });
 
   return (
-      <Suspense fallback={toast.loading("로딩 중...")}>
+      <Suspense>
         <QueryClientProvider client={queryClient}>
           <Toaster
             position="top-center"

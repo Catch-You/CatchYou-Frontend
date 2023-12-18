@@ -3,13 +3,15 @@ import { $axios } from "../lib/axios";
 import { TApiResponse } from "../types/commonTypes";
 import { TLogin, TLoginRes } from "../types/user/LoginTypes";
 import { TEmailCheck, TEmailCode, TSignUp } from "../types/user/SignTypes";
+import { authToken } from "../class/authToken";
+// import { authToken } from "../class/authToken";
 
 const USER_QUERY_KEYS = {
   EMAIL_DUPLICATE_CHECK: (email: string) => `/signup/email-check/${email}`,
   EMAIL_AUTHENTICATION: (email: string) => `/signup/mail-confirm/${email}`, 
   SIGN_UP: () => '/signup',
   LOGIN: () => '/auth/login',
-  RE_TOKEN: () => '/auth/reissue',
+  RE_TOKEN: () => '/auth/login/reissue',
 } as const;
 
 // 이메일 중복체크
@@ -29,15 +31,12 @@ export const postSignUp = async (params: TSignUp) => {
 }
 
 // 로그인
-export const postLogin = async (params: TLogin): Promise<{ userName: string; role: string }> => {
+export const postLogin = async (params: TLogin): Promise<{ userName: string; role: string, accessToken: string }> => {
   try {
     const res = await $axios.post(USER_QUERY_KEYS.LOGIN(), params)
     const { accessToken, accessTokenExpireDate, userName, role } = res.data
-
-    // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-    $axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    setTimeout(getToken, (accessTokenExpireDate - 60) * 1000);
-    return { userName, role };
+    setTimeout(getToken, accessTokenExpireDate);
+    return { userName, role, accessToken };
   } catch (err) {
     toast.error("로그인 실패");
     throw err;
@@ -47,10 +46,7 @@ export const postLogin = async (params: TLogin): Promise<{ userName: string; rol
 // 토큰 재발급, 자동 새로고침
 export const getToken = async () => {
   const res = await $axios.get<TApiResponse<TLoginRes>>(USER_QUERY_KEYS.RE_TOKEN());
-  if (res.data.code !== 200) {
-    toast.error("토큰 재발급 실패")
-  } else {
-    const token = res.data.data.refreshToken;
-    $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } 
+  $axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.refreshToken}`;
+  authToken.setToken(res.data.data.refreshToken)
+  return res.data.data.refreshToken; 
 }
