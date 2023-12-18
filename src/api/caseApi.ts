@@ -7,7 +7,8 @@ const CASE_QUERY_KEYS = {
   CASE_REGIST: () => '/criminal/police',
   CASE_DETAIL: (id: number) => `/criminal/police/${id}`,
   MY_CASE: (role: string) => `/criminal/${role}/myList`,
-  CASE_CODE: (code: string) => `/criminal/director/confirm-code/${code}`
+  CASE_CODE: (code: string) => `/criminal/director/confirm-code/${code}`,
+  INTERVIEW_CREATE: (caseId: number) => `/interview/${caseId}`
 } as const;
 
 // 사건 등록
@@ -37,14 +38,25 @@ export const getMyCaseList = async (role: string, auth: string) => {
 
 // 사건 코드 유효성 검사
 export const postCaseCode = async (code: string, auth: string) => {
-  const res = await $axios.post(CASE_QUERY_KEYS.CASE_CODE(code), code,{
+  const res = await $axios.post(CASE_QUERY_KEYS.CASE_CODE(code), code, {
     headers: {
       Authorization: `Bearer ${auth}`,
     }
   });
-  if (res.data.success) {
+  if (res.status == 200) {
     return res.data;
-  } else {
+  }
+  if (!res.data.success) {
     throw new Error(res.data.reason);
   }
+}
+
+// 사건 인터뷰 생성 (몽타주 제작~재생성)
+export const postInterviewCreate = async (caseId: number, auth: string) => {
+  const res = await $axios.post(CASE_QUERY_KEYS.INTERVIEW_CREATE(caseId), caseId, {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    }
+  });
+  return res.data;
 }
