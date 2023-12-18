@@ -43,3 +43,13 @@ export type TMyCase = {
   status: string;
   selectStatus: string;
 }
+
+// 사건 코드 응답
+export type TCaseCodeRes = {
+  success: boolean;
+  statusCode: number;
+  errorCode: string;
+  reason: string;
+  time: string;
+  path: string;
+}
