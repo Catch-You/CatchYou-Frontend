@@ -7,10 +7,12 @@ type TSelector = {
   options: string[];
   type?: number;
   caseForm?: TCaseForm,
+  isOpenCase?: boolean;
   setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
+  setIsOpenCase?: (open: boolean) => void; 
 }
 
-const SmallSelector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
+const SmallSelector = ({text, options, type, caseForm, setCaseForm, isOpenCase, setIsOpenCase }: TSelector) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -28,6 +30,10 @@ const SmallSelector = ({text, options, type, caseForm, setCaseForm }: TSelector)
     } else if (caseForm && setCaseForm && type === 2) {
       setCaseForm({...caseForm, type: option})
     }
+    // 본인 사건 리스트 공개/비공개 여부 상태관리
+    if (setIsOpenCase && option) {
+      setIsOpenCase(!isOpenCase)
+    } 
     setIsOpen(false);
   };
 

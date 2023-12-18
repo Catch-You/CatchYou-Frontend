@@ -9,7 +9,7 @@ const Header = () => {
   const isLoggedIn = useRecoilValue(userLoginState);
 
   const userInfo = useRecoilValue(userInfoState); 
-  const role = userInfo.role === 'ROLE_POLICE' ? '경찰':'몽타주 전문가'
+  const role = userInfo === 'ROLE_POLICE' ? '경찰':'몽타주 전문가'
 
   return (
     <div className='flex justify-between px-40 py-15 items-center bg-white'>

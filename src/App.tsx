@@ -9,7 +9,7 @@ import { LAYOUT_ROUTES } from "./routes/layoutRouter";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Suspense } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
