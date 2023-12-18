@@ -45,8 +45,8 @@ const MontageFirmUp = () => {
       <div className="text-center text-20 font-semibold mt-10">몽타주 후보군</div>
       {montageAll && montageAll.map((montage) => (
         <div key={`${montage.id} ${interviewId}`} className="mt-30">
-          <div className="flex flex-wrap gap-10"  onClick={() => handleFirmMontage(montage.id)}>
-            <InfoCard key={`${montage.id} ${interviewId} c`} montageId={montage.id}/>
+          <div className="flex flex-wrap gap-10 cursor-pointer" onClick={() => handleFirmMontage(montage.id)}>
+            <InfoCard key={`${montage.id} ${interviewId} c`} montageId={montage.id} selectedId={selectedId}/>
           </div>
         </div>
       ))}

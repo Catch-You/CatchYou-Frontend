@@ -4,9 +4,10 @@ type TInfoCard = {
   montageId: number;
   caseId?: number;
   title?: string;
+  selectedId?: number;
 }
 
-const InfoCard = ({montageId, caseId, title}: TInfoCard) => {
+const InfoCard = ({montageId, caseId, title, selectedId}: TInfoCard) => {
   const navigate = useNavigate();
   const handleClick = ()  => {
     if (title) {
@@ -14,8 +15,8 @@ const InfoCard = ({montageId, caseId, title}: TInfoCard) => {
     }
   }
   return (
-    <div className="w-200 h-200 rounded-lg bg-white flex flex-col mb-50" onClick={handleClick}>
-      <img className={title? "rounded-t-lg object-fill" : "rounded-lg"} src={`https://diffusion-ml.s3.ap-northeast-2.amazonaws.com/${montageId}.png`} width={200} height={200} />
+    <div className="w-200 h-180 rounded-lg bg-white flex flex-col mb-50 focus:border-2 focus:border-mainColor" onClick={handleClick}>
+      <img className={title? "rounded-t-lg object-fill" : (selectedId? "rounded-lg border-4 border-subColor":"rounded-lg")} src={`https://diffusion-ml.s3.ap-northeast-2.amazonaws.com/${montageId}.png`} width={200} height={200} /> 
       {title && (<div className="text-center text-16 py-8 bg-white rounded-b-lg">{title}</div>)}
     </div>
   )
