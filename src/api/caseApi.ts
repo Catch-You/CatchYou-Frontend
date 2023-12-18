@@ -9,6 +9,7 @@ const CASE_QUERY_KEYS = {
   CASE_MODIFY: (caseId: number) => `/criminal/police/${caseId}`,
   CASE_DETAIL: (id: number) => `/criminal/police/${id}`,
   MY_CASE: (role: string) => `/criminal/${role}/myList`,
+  MY_CASE_DETAIL: (caseId: number) => `/criminal/police/${caseId}`,
   CASE_CODE: (code: string) => `/criminal/director/confirm-code/${code}`,
   INTERVIEW_CREATE: (caseId: number) => `/interview/${caseId}`
 } as const;
@@ -76,4 +77,14 @@ export const postInterviewCreate = async (caseId: number, auth: string) => {
     }
   });
   return res.data;
+}
+
+// 내가 담당한 사건 상세 조회 : 경찰
+export const getMyCaseDetail = async (caseId: number, auth: string) => {
+  const res = await $axios.get<TCaseDetail>(CASE_QUERY_KEYS.MY_CASE_DETAIL(caseId), {
+    headers: {
+      Authorization: `Bearer ${auth}`,
+    }
+  });
+  return res;
 }

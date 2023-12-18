@@ -36,7 +36,7 @@ export const NOT_LAYOUT_ROUTES_URLS = {
     name: "사건 수정 페이지",
     path: (id = ":id") => `${id}/modifyCase`,
     component: CaseModifyPage
-  }
+  },
 } as const;
 
 export const NOT_LAYOUT_ROUTES: TRoute[] = Object.values(NOT_LAYOUT_ROUTES_URLS);
