@@ -1,26 +1,28 @@
-import Table from "../../atoms/table";
+import { useRecoilValue } from "recoil";
 import SmallSelector from "../../molecules/smallselector";
+import { userInfoState, userState } from "../../../recoil";
+import { useGetMyCaseList } from "../../../hooks/queries/case/caseQueries";
+import Table from "../../atoms/table";
+import { useState } from "react";
+
 
 
 const MyPage = () => {
-  
+
+  const role = useRecoilValue(userInfoState);
+  const auth = useRecoilValue(userState);
+  const userRole = role.role === "ROLE_POLICE" ? "police" : "director";
+  const [isOpenCase, setIsOpenCase] = useState(false);
+
+  // server
+  const { data: myCaseList } = useGetMyCaseList(userRole, auth)
+
   return (
     <div className="flex flex-col">
-    <div className="flex justify-end"><SmallSelector text="공개여부" options={["공개","비공개"]} /></div>
+    <div className="flex justify-end"><SmallSelector text="공개여부" options={["공개","비공개"]} setIsOpenCase={setIsOpenCase} isOpenCase={isOpenCase} /></div>
     <div className="ml-60 text-18 font-semibold mt-20">사건 목록</div>
     <div className="ml-60">
-      <Table title={['사건번호', '공개여부', '몽타주']} data={[
-      {
-        no: '2023고단454',
-        public: true,
-        montage: 'https://sdfsdf//12234/23dsjfkdfsdf',
-      },
-      {
-        no: '2013고단254',
-        public: false,
-        montage: 'https://sdfsdf//4234/11dsjfkd',
-      },   
-    ]}/>
+      {myCaseList && <Table title={['사건번호', '사건명', '공개여부']} caseList={myCaseList} userRole={role} isOpenCase={isOpenCase}/>}
     </div>
     </div>
   )
