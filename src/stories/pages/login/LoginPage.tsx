@@ -6,7 +6,7 @@ import Longfield from "../../molecules/longfield";
 import NoticeMsg from "../../atoms/noticeMsg";
 import { useMutation } from "react-query";
 import { postLogin } from "../../../api/userApi";
-import { userInfoState, userLoginState } from "../../../recoil";
+import { userInfoState, userLoginState, userState } from "../../../recoil";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ const LoginPage = () => {
     email: '',
     password: '',
   })
+  const [, setAuth] = useRecoilState(userState);
   const { validText, isValid } = useValid(form);
   const [error, setError] = useState(false);
   const [, setIsLoggedIn] = useRecoilState(userLoginState); 
@@ -31,8 +32,9 @@ const LoginPage = () => {
   // server
   const { mutate: login } = useMutation(postLogin, {
     onSuccess: (data) => {
-      const { userName, role } = data;
+      const { userName, role, accessToken } = data;
       setIsLoggedIn(true); 
+      setAuth(accessToken)
       setUserInfo({userName, role})
       navigate('/');
     }

@@ -6,6 +6,9 @@ import Modal from "../../atoms/modal";
 import { postCase } from "../../../api/caseApi";
 import { useMutation } from "react-query";
 import { TYPE_OF_CRIME, TYPE_OF_REGION } from "../../../constants/case";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../recoil";
+import { TCaseRegist } from "../../../types/case/caseManage";
 
 export type TCaseForm = { 
   title: string,
@@ -30,15 +33,20 @@ const CaseRegistPage = () => {
     overview: '',
   })
 
+  const auth = useRecoilValue(userState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegister = () => {
     setIsModalOpen(true);
-    caseRegist({title: caseForm.title, summary: caseForm.overview, description: caseForm.impressive, region:caseForm.region, crimeType: caseForm.type})
+    caseRegist({title: caseForm.title, summary: caseForm.overview, description: caseForm.impressive, region:caseForm.region, crimeType: caseForm.type}, auth)
   }
 
   // server
-  const { mutate: caseRegist } = useMutation(postCase);
+  const { mutate: caseRegist } = useMutation((params: TCaseRegist) => postCase(params, auth), {
+    onSuccess: () => {
+      setIsModalOpen(true);
+    },});
+
 
   return (
     <div className="flex justify-center">
