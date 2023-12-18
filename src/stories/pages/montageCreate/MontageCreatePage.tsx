@@ -9,7 +9,6 @@ const MontageCreatePage = () => {
 
   const handleClick = () => {
     setRecreate(true);
-    console.log('recreate state after click:', recreate);
   }
 
   return (

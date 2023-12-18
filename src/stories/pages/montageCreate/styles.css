@@ -2,9 +2,10 @@
   position: relative;
   width: 200px;
   height: 200px;
-  background-image: url('https://img.danawa.com/prod_img/500000/388/133/img/24133388_1.jpg?_v=20230728095239');
+  background-image: url('https://diffusion-ml.s3.ap-northeast-2.amazonaws.com/5.png');
   background-size: cover;
   background-position: center; 
   border: 2px solid #DBE2EF;
   border-radius: 12px;
+  opacity: 0.4;
 }
