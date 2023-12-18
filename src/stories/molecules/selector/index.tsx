@@ -7,10 +7,11 @@ type TSelector = {
   options: string[];
   type?: number;
   caseForm?: TCaseForm,
+  setSex?: (value: string) => void;
   setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
 }
 
-const Selector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
+const Selector = ({text, options, type, caseForm, setCaseForm, setSex }: TSelector) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -27,6 +28,8 @@ const Selector = ({text, options, type, caseForm, setCaseForm }: TSelector) => {
       setCaseForm({...caseForm, region: option})
     } else if (caseForm && setCaseForm && type === 2) {
       setCaseForm({...caseForm, type: option})
+    } else if (setSex && type === 99) {
+      setSex(option)
     }
     setIsOpen(false);
   };
