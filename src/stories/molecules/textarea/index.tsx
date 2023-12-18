@@ -10,11 +10,12 @@ type TTextArea = {
   type?: number;
   caseForm?: TCaseForm,
   setCaseForm?: Dispatch<SetStateAction<TCaseForm>>;
+  setImpression?: (value: string) => void;
 }
 
-// type - 0: 인상착의, 1: 사건 개요, 2: 사건 타이틀
+// type - 0: 인상착의, 1: 사건 개요, 2: 사건 타이틀, 99: 인터뷰 인상
 
-const TextArea = ({text, rows, maxInput, placeholder, type, bgColor, caseForm, setCaseForm}: TTextArea) => {
+const TextArea = ({text, rows, maxInput, placeholder, type, bgColor, caseForm, setCaseForm, setImpression}: TTextArea) => {
   const [inputCount, setInputCount] = useState(0);
 
   const onTextareaHandler = (input: string) => {
@@ -27,7 +28,9 @@ const TextArea = ({text, rows, maxInput, placeholder, type, bgColor, caseForm, s
       setCaseForm({...caseForm, overview: input})
     }  else if (caseForm && setCaseForm && type === 2) {
       setCaseForm({...caseForm, title: input})
-    } 
+    } else if (setImpression && type === 99) {
+      setImpression(input)
+    }
     
   };
   return (
