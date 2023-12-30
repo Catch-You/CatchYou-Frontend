@@ -15,7 +15,7 @@ export const TYPE_OF_REGION = {
 // 사건 범죄 종류
 export const TYPE_OF_CRIME = {
   ROBBERY: "강도",
-  MURDER: "살인",
+  MURDER: "살인(미수)",
   THEFT: "절도",
   SEXCRIME: "성범죄",
   ARSON: "방화",
