@@ -1,17 +1,25 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createDate } from "../../../utils/datepick";
+import CommonBtn from "../../atoms/commonBtn";
+import { useGetMontageDetail } from "../../../hooks/queries/montage/montageQueries";
 
-const MyCasePage = () => {
+const MyCasePolicePage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const caseDetail = location.state.caseDetail
   const title = caseDetail.directorId? (caseDetail.montageId ? '확정된 사건' : '제작자를 배정 받은 사건') : '제작자를 배정 받지 않은 사건';
+  const id = caseDetail.id
+
+  const { data: cases } = useGetMontageDetail(Number(caseDetail.id));
+
 
   return (
     <div className="flex justify-center">
       {caseDetail && (
-      <div className="bg-white w-full max-w-900 h-full max-h-fit rounded-20 py-20 px-50 ">
+      <div className="bg-white w-full max-w-900 h-full max-h-fit rounded-20 py-20 px-50 mt-30">
         <div className="flex items-center gap-4">
-          <div className="text-white text-19 bg-mainColor w-fit px-20 py-4 rounded-15">{title}</div>
+
+          <div className="text-white text-18 bg-mainColor w-fit px-20 py-4 rounded-15">{title}</div>
           <div className="w-fit px-20 py-4 border-superSubColor rounded-15 border-2">{caseDetail.status === "Y"? "공개" : "비공개"}</div>
         </div>
         <div className='flex items-center justify-between mt-20'>
@@ -43,9 +51,11 @@ const MyCasePage = () => {
           {caseDetail.summary}
         </div>
       </>
+        <button className="mt-10 text-white text-18 bg-mainColor w-fit px-20 py-4 rounded-15" onClick={() => navigate(`/${id}`, { state: { cases, id} })}>수정하기</button>
+
       </div>)}
     </div>
   )
 }
 
-export default MyCasePage;
+export default MyCasePolicePage;

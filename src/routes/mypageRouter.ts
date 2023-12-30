@@ -1,6 +1,7 @@
 import MontageCreatePage from "../stories/pages/montageCreate/MontageCreatePage";
 import MontageFirmUp from "../stories/pages/montageFirmUp/MontageFirmUpPage";
-import MyCasePage from "../stories/pages/my/MyCasePage";
+import MyCaseDirectorPage from "../stories/pages/my/MyCaseDirectorPage";
+import MyCasePolicePage from "../stories/pages/my/MyCasePolicePage";
 import MyPage from "../stories/pages/my/MyPage";
 import { TRoute } from "../types/commonTypes";
 
@@ -20,10 +21,15 @@ export const MYPAGE_ROUTES_URLS = {
     path: () => '/firmUpMontage',
     component: MontageFirmUp,
   },
-  myCaseDetailPage: {
-    name: "담당 사건 상세 페이지",
-    path: (id = ":id") => `/my/${id}`,
-    component: MyCasePage,
+  MyCasePolicePage: {
+    name: "담당 사건 상세 페이지 (경찰)",
+    path: (id = ":id") => `/my/police/${id}`,
+    component: MyCasePolicePage,
+  },
+  MyCaseDirectorPage: {
+    name: "담당 사건 상세 페이지 (몽타주 전문가)",
+    path: (id = ":id") => `/my/director/${id}`,
+    component: MyCaseDirectorPage,
   }
 } as const;
 

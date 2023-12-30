@@ -6,10 +6,11 @@ import MypageLayout from "./stories/template/common/MypageLayout";
 import { MYPAGE_ROUTES } from "./routes/mypageRouter";
 import { NOT_LAYOUT_ROUTES } from "./routes/notLayoutRouter";
 import { LAYOUT_ROUTES } from "./routes/layoutRouter";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { userInfoState, userLoginState, userRoleState, userState } from "./recoil";
 
 function App() {
   return (
@@ -20,7 +21,24 @@ function App() {
 }
   
 function MyComponent() {
+  // const [userInfo,setUserInfo] = useRecoilState(userInfoState);
+  // const [user,setUser] = useRecoilState(userRoleState);
+  // const [auth, setAuth] = useRecoilState(userState)
+  // const [login, setLogin] = useRecoilState(userLoginState)
 
+  // useEffect(() =>{
+  //   setUserInfo({
+  //     role: '',
+  //     userName: ''
+  //   })
+  //   setAuth('')
+  //   setUser ('');
+  //   setLogin(false)
+  // },[]
+  // )
+
+  
+  
   const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
