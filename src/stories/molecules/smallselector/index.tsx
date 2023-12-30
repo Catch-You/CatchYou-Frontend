@@ -40,11 +40,16 @@ const SmallSelector = ({text, options, type, caseForm, status, setStatus, setCas
     setIsOpen(false);
   };
 
+  const handleSelectClick = (e: React.MouseEvent<HTMLSelectElement>) => {
+    e.preventDefault(); // 시스템 기본 동작 막기
+    handleToggle(); // 드롭다운 토글
+  };
+
   return (
     <div className="flex flex-col gap-1">
       <div className='text-14'>{text}</div>
       <div className='relative'>
-        <select className='w-193 rounded-12 border-2 border-superSubColor px-14 py-8 appearance-none text-15' onClick={handleToggle} onChange={(e) => setSelectedOption(e.target.value)} >
+        <select className='w-193 rounded-12 border-2 border-superSubColor px-14 py-8 appearance-none text-15' onClick={handleSelectClick} onChange={(e) => setSelectedOption(e.target.value)} >
           <option>
             {selectedOption ? selectedOption : '옵션을 선택하세요'}
           </option>

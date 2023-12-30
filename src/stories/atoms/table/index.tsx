@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { TMyCase } from "../../../types/case/caseManage";
 import { useNavigate } from "react-router-dom";
-import { getMyCaseDetail } from "../../../api/caseApi";
+import { getMyCaseDetail, getMyCaseDetailDirector } from "../../../api/caseApi";
 import { useRecoilValue } from "recoil";
-import { userState } from "../../../recoil";
-import toast from "react-hot-toast";
+import { userInfoState, userState } from "../../../recoil";
 
 type TTable = {
   title: string[],
@@ -14,8 +13,9 @@ type TTable = {
 
 const Table = ({title, caseList, isOpenCase}: TTable) => {
   const navigator = useNavigate();
-  const [filteredData, setFilteredData] = useState<TMyCase[]>([]);
   const auth = useRecoilValue(userState)
+  const role = useRecoilValue(userInfoState).role === "ROLE_POLICE" ? true : false;
+  const [filteredData, setFilteredData] = useState<TMyCase[]>([]);
   const [caseId, setCaseId] = useState<number | null>(null);
 
   const handleCaseClick = (caseId: number) => {
@@ -24,15 +24,20 @@ const Table = ({title, caseList, isOpenCase}: TTable) => {
 
   useEffect(() => {
   if (caseId !== null) {
-    getMyCaseDetail(caseId, auth)
+    if (role) {
+      getMyCaseDetail(caseId, auth)
       .then((data) => {
         const caseDetail = data.data
-        console.log("dddaata", data.data)
-        navigator(`/my/${caseId}`, { state: { caseDetail } });
+        navigator(`/my/police/${caseId}`, { state: { caseDetail } });
       })
-      .catch((error) => {
-        toast.error(error)
-      });
+    }
+    if (!role) {
+      getMyCaseDetailDirector(caseId, auth)
+      .then((data) => {
+        const caseDetail = data.data
+        navigator(`/my/director/${caseId}`, { state: { caseDetail } });
+      })
+    }
   }
 }, [caseId]);
 

@@ -1,3 +1,9 @@
+// 담당 사건 상세 : 몽타주 전문가
+export type TDirectorCase = {
+  detailsDto: TCaseDetail[],
+  montages: {id: number}[]
+}
+
 // 사건 상세 Response
 export type TCaseDetail = {
   id: number;

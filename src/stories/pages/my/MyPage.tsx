@@ -3,7 +3,7 @@ import SmallSelector from "../../molecules/smallselector";
 import { userInfoState, userState } from "../../../recoil";
 import { useGetMyCaseList } from "../../../hooks/queries/case/caseQueries";
 import Table from "../../atoms/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MyPage = () => {
 
