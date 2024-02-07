@@ -9,4 +9,10 @@
 
 ## 기술 스택 
 
-<img width="830" alt="스크린샷 2024-02-07 오전 11 37 12" src="https://github.com/Catch-You/CatchYou-Frontend/assets/69382168/db9e9edd-326f-4001-adbc-2c7425060ea3">
+
+<img width="830" alt="스크린샷 2024-02-07 오후 12 49 55" src="https://github.com/Catch-You/CatchYou-Frontend/assets/69382168/a23cd32a-afca-403f-833b-bba211e524aa">
+
+
+## 시연 영상
+
+https://www.youtube.com/watch?v=GVbvMQWJYww&t=158s
